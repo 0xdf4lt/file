@@ -1,44 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Unique Action</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body {
-            text-align: center;
-            font-family: sans-serif;
-            margin-top: 40%;
-            user-select: none;
-            overflow: hidden;
-        }
-    </style>
-    <script>
-        // محاولة منع الإغلاق أو الرجوع
-        window.onbeforeunload = function() {
-            return "Wait! The action is still running.";
-        };
-
-        // محاولة تعطيل زر الرجوع
-        history.pushState(null, "", window.location.href);
-        window.onpopstate = function () {
-            history.pushState(null, "", window.location.href);
-        };
-
-        // محاولة التجميد الكامل
-        window.onload = () => {
-            const freezeFor = 10000; // 10 ثواني
-            const start = Date.now();
-            while (Date.now() - start < freezeFor) {
-                // تجميد المتصفح مؤقتًا
-            }
-            document.body.innerHTML = "<h1>The unique action has expired.</h1>";
-            window.onbeforeunload = null; // نزيل المنع بعد انتهاء المزحة
-        };
-    </script>
+  <meta charset="UTF-8">
+  <title>Just for You 💖</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background: radial-gradient(circle, #ffe6f0, #ffc2d1);
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      color: #ff007f;
+      text-align: center;
+      padding-top: 20%;
+      overflow: hidden;
+    }
+    h1 {
+      font-size: 2.5em;
+      animation: pulse 2s infinite;
+    }
+    p {
+      font-size: 1.2em;
+      margin-top: 10px;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    .heart {
+      position: absolute;
+      color: #ff4d88;
+      font-size: 2em;
+      animation: float 5s infinite;
+    }
+    @keyframes float {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-600px) scale(1.5); opacity: 0; }
+    }
+  </style>
 </head>
 <body>
-    <h1>Performing a unique action...</h1>
-    <p>Please wait</p>
+  <h1>💖 You're Loved! 💖</h1>
+  <p>Just wanted to say you're amazing, and this moment is just for you 🌸
+                          Love you GhoGho </p>
+
+  <!-- قلوب تطير -->
+  <script>
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.innerText = '❤️';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.top = '100vh';
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 5000);
+    }
+
+    setInterval(createHeart, 300);
+  </script>
 </body>
 </html>
