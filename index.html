@@ -3,21 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <title>Unique Action</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body {
             text-align: center;
-            font-family: Arial, sans-serif;
-            margin-top: 20%;
+            font-family: sans-serif;
+            margin-top: 40%;
+            user-select: none;
+            overflow: hidden;
         }
     </style>
     <script>
-        setTimeout(() => {
+        // محاولة منع الإغلاق أو الرجوع
+        window.onbeforeunload = function() {
+            return "Wait! The action is still running.";
+        };
+
+        // محاولة تعطيل زر الرجوع
+        history.pushState(null, "", window.location.href);
+        window.onpopstate = function () {
+            history.pushState(null, "", window.location.href);
+        };
+
+        // محاولة التجميد الكامل
+        window.onload = () => {
+            const freezeFor = 10000; // 10 ثواني
+            const start = Date.now();
+            while (Date.now() - start < freezeFor) {
+                // تجميد المتصفح مؤقتًا
+            }
             document.body.innerHTML = "<h1>The unique action has expired.</h1>";
-        }, 10000); // 10 seconds
+            window.onbeforeunload = null; // نزيل المنع بعد انتهاء المزحة
+        };
     </script>
 </head>
 <body>
-    <h1>Performing your unique action...</h1>
-    <p>This will expire in 10 seconds.</p>
+    <h1>Performing a unique action...</h1>
+    <p>Please wait</p>
 </body>
 </html>
